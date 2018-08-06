@@ -23,6 +23,8 @@ class QuestionRepository implements QuestionRepositoryInterface
             ->where('user_id', '=', Auth::id())
             ->order_by('created_at', 'desc')
             ->first();
+
+        
         /*
          *  2. select Question
          */
