@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Question;
 
 use App\Models\Test\Question;
+use App\Models\Test\QuestionAnswer;
 use App\Models\Test\Test;
 use App\Repositories\Question\QuestionRepositoryInterface;
 use Illuminate\Http\Request;
@@ -29,6 +30,8 @@ class TestController extends Controller
     /**
      * TestController constructor.
      * @param Question $questions
+     * @param Test $test
+     * @param QuestionRepositoryInterface $questionRepository
      */
     public function __construct(Question $questions, Test $test, QuestionRepositoryInterface $questionRepository)
     {
@@ -64,13 +67,37 @@ class TestController extends Controller
 
     public function actionSaveQuestion($id, Request $request)
     {
-        if(!Session::has('test_id')  )
-        {
+        /*
+         *  Check session and if user has permission to do this.
+         */
+        if (Session::has('test_id')) {
 
+//            $questionAnswer = QuestionAnswer::firstOrNew(
+//                ['question_number' => $id]
+//            );
+//            $questionAnswer->question_option_id = $request->input('question_option_id');
+//            $questionAnswer->question_number = $id;
+//            $questionAnswer->test_id = Session::get('test_id');
+//            $questionAnswer->save();
+//
+            /*
+             *  1. Check Type Of Question
+             */
+            $questionType = Question::select('question_type')->where('question_type', '=', $id)->first();
+
+            switch ($questionType) {
+                case 'choose':
+
+                    break;
+                case 'open':
+
+                    break;
+            }
         }
+
     }
 
-    public function actionSaveMultipleQuestions ()
+    public function actionSaveMultipleQuestions()
     {
 
     }

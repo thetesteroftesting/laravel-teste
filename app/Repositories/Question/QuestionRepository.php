@@ -2,6 +2,8 @@
 
 namespace App\Repositories\Question;
 
+use App\Models\Test\Question;
+
 class QuestionRepository implements QuestionRepositoryInterface
 {
 
@@ -23,8 +25,6 @@ class QuestionRepository implements QuestionRepositoryInterface
             ->where('user_id', '=', Auth::id())
             ->order_by('created_at', 'desc')
             ->first();
-
-        
         /*
          *  2. select Question
          */
@@ -42,7 +42,16 @@ class QuestionRepository implements QuestionRepositoryInterface
         }
     }
 
-
+    /**
+     * @param $id
+     * @return string
+     */
+    public function getQuestionType($id)
+    {
+        return Question::with('questionType')
+            ->select('name')
+            ->first();
+    }
 }
 
 

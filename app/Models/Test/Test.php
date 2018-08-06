@@ -6,7 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Test extends Model
 {
-    public function answers ()
+
+//    public function attempsQuantity()
+//    {
+//
+//    }
+
+    /*
+     *  RELATIONS
+     */
+    public function answers()
     {
         $this->hasMany(QuestionAnswer::class);
     }

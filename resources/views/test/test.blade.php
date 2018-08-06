@@ -34,7 +34,7 @@
                                     <h5 class="card-title">{{ $question->text }}</h5>
                                     <p class="card-text">
                                         @foreach($question->options as $option)
-                                            <small><input type="radio">{{ $option->name }}</small><br>
+                                            <small><input type="radio" data-question-type="question-select" value="{{ $option->id }}">{{ $option->name }}</small><br>
                                         @endforeach
                                     </p>
                                 </div>
@@ -47,9 +47,18 @@
     </div>
 
     <script type="text/javascript">
-        window.onbeforeunload = function () {
-            return "Are you sure that you want to leave this page?";
-        }
+        $(document).ready(function () {
+            var id;
+
+
+
+            $.ajax({
+                type: "POST",
+                url: '/test/question/save/' . id,
+                data: data,
+            });
+
+        });
     </script>
 @endsection
 

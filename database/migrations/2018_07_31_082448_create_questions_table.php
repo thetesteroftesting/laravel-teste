@@ -20,7 +20,7 @@ class CreateQuestionsTable extends Migration
             $table->integer('options_id')->unsigned();
             $table->integer('answer_correct_id')->unsigned();
             $table->integer('effect_of_progress_id')->unsigned();
-            $table->integer('question_type_id')->unsigned();
+            $table->string('question_type');
 
 //            $table->foreign('options_id')
 //                ->references('id')
