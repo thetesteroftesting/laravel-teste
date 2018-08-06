@@ -34,7 +34,7 @@
                                     <h5 class="card-title">{{ $question->text }}</h5>
                                     <p class="card-text">
                                         @foreach($question->options as $option)
-                                            <small><input type="radio" data-question-type="question-select" value="{{ $option->id }}">{{ $option->name }}</small><br>
+                                            <small><input name="radio-option-{{ $question->id}}" type="radio" data-question-type="question-select" value="{{ $option->id }}">{{ $option->name }}</small><br>
                                         @endforeach
                                     </p>
                                 </div>
