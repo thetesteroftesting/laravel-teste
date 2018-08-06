@@ -2,6 +2,7 @@
 @section('content')
     <div class="text-center">
         <h1>Pytania walidacyjne:</h1>
+        <small>Jest to twoje podejście do tego testu</small>
     </div>
     <div class="container mt-5">
         <div class="row">
@@ -44,7 +45,14 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        window.onbeforeunload = function () {
+            return "Are you sure that you want to leave this page?";
+        }
+    </script>
 @endsection
+
 
 
 

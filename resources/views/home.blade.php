@@ -11,9 +11,10 @@
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
+
                         </div>
                     @endif
-
+                    <h1>{{ Session::get('test_id') }}</h1>
                     You are logged in!
                 </div>
             </div>

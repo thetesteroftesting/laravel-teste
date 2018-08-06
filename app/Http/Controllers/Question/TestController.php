@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Question;
 
 use App\Models\Test\Question;
+use App\Models\Test\Test;
+use App\Repositories\Question\QuestionRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class TestController extends Controller
 {
@@ -13,80 +17,62 @@ class TestController extends Controller
      * @var Question
      */
     private $questions;
+    /**
+     * @var Test
+     */
+    private $test;
+    /**
+     * @var QuestionRepositoryInterface
+     */
+    private $questionRepository;
 
     /**
      * TestController constructor.
      * @param Question $questions
      */
-    public function __construct(Question $questions)
+    public function __construct(Question $questions, Test $test, QuestionRepositoryInterface $questionRepository)
     {
         $this->questions = $questions;
+        $this->test = $test;
+        $this->questionRepository = $questionRepository;
     }
 
     /**
-     * Show the form for creating a new resource.
+     * STARTS NEW TEST OR CONTINUE PREVIOUS
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function startTest(Request $request)
     {
         $questions = $this->questions->getAll();
-        return view('test.test')->with('questions', $questions);
+
+        //check if isset session
+        if (!Session::has('test_id')) {
+            $testCreator = new Test();
+            $testCreator->user_id = Auth::id();
+            $testCreator->completed = 0;
+            $testCreator->points = 0;
+            $testCreator->save();
+            Session::put('test_id', $testCreator->id);
+        } else {
+
+        }
+
+        return view('test.test')
+            ->with('questions', $questions);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function actionSaveQuestion($id, Request $request)
     {
-        //
+        if(!Session::has('test_id')  )
+        {
+
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function actionSaveMultipleQuestions ()
     {
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

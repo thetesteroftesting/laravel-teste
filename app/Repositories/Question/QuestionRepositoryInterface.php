@@ -7,6 +7,5 @@ use http\Env\Request;
 
 interface QuestionRepositoryInterface
 {
-    public function getAll();
-    public function store(Request $request);
+    public function canQuestionBeEditByUser($id);
 }

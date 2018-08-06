@@ -8,12 +8,12 @@ class QuestionAnswer extends Model
 {
     public function question ()
     {
-        return $this->hasOne(Question::class);
+        return $this->hasOne(Question::class, 'question_number', 'question_number');
     }
 
     public function test ()
     {
-        return $this->hasOne(Test::class);
+        return $this->hasOne(Test::classs);
     }
 
 

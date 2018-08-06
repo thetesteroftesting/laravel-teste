@@ -2,45 +2,42 @@
 
 namespace App\Repositories\Question;
 
-use App\Models\Test\Question;
-use App\User;
-use http\Env\Request;
-
 class QuestionRepository implements QuestionRepositoryInterface
 {
-    /**
-     * @var UserRepository
-     */
-    private $user;
 
-    /**
-     * QuestionRepository constructor.
-     * @param User $user
-     */
-    public function __construct(UserRepositoryInterface $user)
+    public function __construct()
     {
-        $this->user = $user;
+
     }
 
-    public function getAll()
+    /**
+     * @return bool
+     */
+    public function canQuestionBeEditByUser($id)
     {
-        return User::with('option')
-            ->with('effectOfProgress')
-            ->with('correctAnswer')
-            ->with('questionType')
-            ->get();
-    }
-
-    public function store(Request $request)
-    {
-        $question = new Question();
-        $question->text = 'przyklad';
-        $question->options_id = 1;
-        $question->answer_correct_id = 1;
-        $question->effect_of_progress_id = 1;
-        $question->effect_of_progress_id = 1;
-        $question->question_type_id = 1;
-        $question->save();
+        /*
+         * 1. find latest test ID
+         */
+        $latestTestID = DB::table('tests')
+            ->select('test_id')
+            ->where('user_id', '=', Auth::id())
+            ->order_by('created_at', 'desc')
+            ->first();
+        /*
+         *  2. select Question
+         */
+        $questionTestID = DB::table('question_answers')
+            ->select('test_id')
+            ->where('id', '=', $id)
+            ->first();
+        /*
+         * 3. Compare
+         */
+        if ($questionTestID === $latestTestID) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 

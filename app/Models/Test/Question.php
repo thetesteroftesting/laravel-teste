@@ -11,13 +11,18 @@ class Question extends Model
         return $this->with('options')->with('questionType')->get();
     }
 
+    public function numberOfQuestions ()
+    {
+        return $this->all()->groupBy('question_number')->count();
+    }
+
 
     /*
      *  RELATIONS
      */
     public function options ()
     {
-        return $this->hasMany(QuestionOption::class, 'question_id', 'options_id');
+        return $this->hasMany(QuestionOption::class, 'question_number');
     }
 
 //    public function effectOfProgress()

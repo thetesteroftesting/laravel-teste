@@ -15,7 +15,7 @@ class CreateQuestionAnswerCorrectsTable extends Migration
     {
         Schema::create('question_answer_corrects', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('question_id')->unsigned();
+            $table->unsignedInteger('question_number');
             $table->integer('question_option_id')->unsigned();
 
 //            $table->foreign('question_id')

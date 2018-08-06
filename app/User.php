@@ -5,6 +5,8 @@ namespace App;
 use App\Models\User\PlaceOfEmployment;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
+use phpDocumentor\Reflection\Types\Boolean;
 
 class User extends Authenticatable
 {
@@ -34,6 +36,8 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+
 
 
     /*

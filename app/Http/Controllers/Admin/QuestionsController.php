@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Test\Question;
-use App\Repositories\User\QuestionRepository;
-use App\Repositories\User\QuestionRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -19,9 +17,9 @@ class QuestionsController extends Controller
      * QuestionsController constructor.
      * @param QuestionRepository $question
      */
-    public function __construct(QuestionRepositoryInterface $question)
+    public function __construct()
     {
-        $this->question = $question;
+
     }
 
 
@@ -34,6 +32,7 @@ class QuestionsController extends Controller
     {
         $questions = $this->question->getAll();
         return view('admin.panel.questions.questions')->with('questions', $questions);
+
     }
 
     /**

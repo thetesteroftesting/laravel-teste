@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Question;
 
+use App\Models\Test\QuestionAnswer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
 class QuestionAnswerController extends Controller
 {
@@ -30,7 +32,7 @@ class QuestionAnswerController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -41,7 +43,7 @@ class QuestionAnswerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -52,7 +54,7 @@ class QuestionAnswerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -63,19 +65,32 @@ class QuestionAnswerController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function save($id, Request $request)
     {
-        //
+        if (Session::has('test_id')) {
+            $questionAnswer = QuestionAnswer::firstOrNew(
+                array(
+                    'question_number' => $id,
+                )
+            );
+
+            $questionAnswer->question_option_id = $request->input('question_option_id');
+            $questionAnswer->question_number = $id;
+            $questionAnswer->test_id = Session::get('test_id');
+
+            $questionAnswer->save();
+        }
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

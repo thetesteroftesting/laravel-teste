@@ -8,7 +8,7 @@ class QuestionAnswerCorrect extends Model
 {
     public function questions ()
     {
-        $this->belongsToMany(QuestionAnswer::class);
+        $this->belongsToMany(QuestionAnswer::class, '', 'question_number');
     }
 
     public function questionsOptions ()

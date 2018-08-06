@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Repositories\User\UserRepository;
-use App\Repositories\User\UserRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -18,9 +17,9 @@ class UsersController extends Controller
      * UsersController constructor.
      * @param UserRepository $users
      */
-    public function __construct(UserRepositoryInterface $users)
+    public function __construct()
     {
-        $this->users = $users;
+
     }
 
 
