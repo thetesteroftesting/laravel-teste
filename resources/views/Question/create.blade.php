@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12 text-center align-items-center align-content-center">
+            <div class="col-md-12" id="create-form">
                 <h2>Tworzenie nowego pytania</h2>
                 <hr>
                 <br>
@@ -11,8 +11,8 @@
 
                     <div class="form-group row">
                         <label for="question_number"
-                               class="col-md-4 col-form-label text-md-right">{{ __('question_number') }}</label>
-                        <div class="col-md-6">
+                               class="col-md-2 col-form-label text-md-right">{{ __('question_number') }}</label>
+                        <div class="col-md-10">
                             <input id="question_number" type="text"
                                    class="form-control{{ $errors->has('question_number') ? ' is-invalid' : '' }}"
                                    name="question_number" value="{{ old('question_number') }}" required autofocus>
@@ -26,8 +26,8 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="text" class="col-md-4 col-form-label text-md-right">{{ __('text') }}</label>
-                        <div class="col-md-6">
+                        <label for="text" class="col-md-2 col-form-label text-md-right">{{ __('text') }}</label>
+                        <div class="col-md-10">
                             <textarea id="text" type="text"
                                       class="form-control{{ $errors->has('text') ? ' is-invalid' : '' }}" name="text"
                                       value="{{ old('text') }}" required autofocus></textarea>
@@ -42,8 +42,8 @@
 
                     <div class="form-group row">
                         <label for="description"
-                               class="col-md-4 col-form-label text-md-right">{{ __('description') }}</label>
-                        <div class="col-md-6">
+                               class="col-md-2 col-form-label text-md-right">{{ __('description') }}</label>
+                        <div class="col-md-10">
                             <textarea id="description" type="description"
                                       class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}"
                                       name="description" value="{{ old('description') }}" required autofocus></textarea>
@@ -57,9 +57,9 @@
 
                     <div class="form-group row">
                         <label for="question_type"
-                               class="col-md-4 col-form-label text-md-right">{{ __('question_type') }}</label>
+                               class="col-md-2 col-form-label text-md-right">{{ __('question_type') }}</label>
 
-                        <div class="col-md-6">
+                        <div class="col-md-10">
                             <select name="question_type" id="question_type" type="text"
                                     class="custom-select custom-select-lg mb-3 {{ $errors->has('question_type') ? ' is-invalid' : '' }} "
                                     required autofocus>
@@ -85,8 +85,8 @@
 
                                 <div class="form-group row" id="new-option-1">
                                     <label for="option"
-                                           class="col-md-4 col-form-label text-md-right">{{ __('option') }}</label>
-                                    <div class="col-md-6">
+                                           class="col-md-2 col-form-label text-md-right">{{ __('option') }}</label>
+                                    <div class="col-md-10">
                                         <textarea id="description" type="description"
                                                   class="form-control{{ $errors->has('option') ? ' is-invalid' : '' }}"
                                                   name="option" value="{{ old('option') }}" required
@@ -112,32 +112,37 @@
     </div>
 
     <script>
-        var html = '<div class="form-group row" id="new-option-' + optionsQuantity + '">\n' +
-            '                                    <label for="option"\n' +
-            '                                           class="col-md-4 col-form-label text-md-right">{{ __(\'option\') }}</label>\n' +
-            '                                    <div class="col-md-6">\n' +
-            '                                        <textarea id="description" type="description"\n' +
-            '                                                  class="form-control{{ $errors->has(\'option\') ? \' is-invalid\' : \'\' }}"\n' +
-            '                                                  name="option" value="{{ old(\'option\') }}" required\n' +
-            '                                                  autofocus></textarea>\n' +
-            '                                        <button id="remove-option" class="form-control btn btn-danger">X</button>\n' +
-            '                                        @if ($errors->has(\'option\'))\n' +
-            '                                            <span class="invalid-feedback" role="alert">\n' +
-            '                                        <strong>{{ $errors->first(\'option\') }}</strong>\n' +
-            '                                    </span>\n' +
-            '                                        @endif\n' +
-            '                                    </div>\n' +
-            '                                </div>';
-        var optionsQuantity = 1;
-
         $(document).ready(function () {
-            $('#add-option').click(function () {
-                var lastOptionID = '#new-option-' + optionsQuantity;
+            $('#question_type').change(function () {
+                console.log($(this).val());
+                switch ($(this).val()) {
+                    case 'open':
+                        $('question-options-container').append(openHTML);
+                        break;
 
-                $(lastOptionID).after();
+                    case 'one':
+                        $('question-options-container').append(oneHTML);
+                        break;
 
-                optionsQuantity++;
+                    case 'multiple':
+                        $('question-options-container').append(multipleHTML);
+                        break;
+
+                    case 'truefalse':
+                        $('question-options-container').append(truefalseHTML);
+                        break;
+
+                    case 'sorted':
+                        $('question-options-container').append(sortedHTML);
+                        break;
+
+                    case 'rank':
+                        $('question-options-container').append(rankHTML);
+                        break;
+
+                }
             });
         });
+
     </script>
 @endsection
