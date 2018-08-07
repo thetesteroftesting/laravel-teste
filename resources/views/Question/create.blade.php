@@ -79,7 +79,7 @@
 
 
                             {{-- ADD QUESTION OPTION--}}
-                            <h4>Odpowiedzi</h4>
+                            <h4 class="mt-5">Odpowiedzi</h4>
                             <hr>
                             <div id="question-options-container">
 
@@ -103,7 +103,6 @@
                                 <button id="add-option" class="form-control btn btn-info">Dodaj nową odpowiedź</button>
                             </div>
 
-
                             <hr class="mt-5">
                             <button class="form-control btn-dark">Dodaj Pytanie</button>
                 </form>
@@ -117,27 +116,33 @@
                 console.log($(this).val());
                 switch ($(this).val()) {
                     case 'open':
-                        $('question-options-container').append(openHTML);
+                        if($('#open-option-panel').length){
+                            $('#open-option-panel').remove();
+                        }
+                        else {
+                            @include('question.options.open')
+                        }
+
                         break;
 
                     case 'one':
-                        $('question-options-container').append(oneHTML);
+                        @include('question.options.one')
                         break;
 
                     case 'multiple':
-                        $('question-options-container').append(multipleHTML);
+                        @include('question.options.multiple')
                         break;
 
                     case 'truefalse':
-                        $('question-options-container').append(truefalseHTML);
+                        @include('question.options.truefalse')
                         break;
 
                     case 'sorted':
-                        $('question-options-container').append(sortedHTML);
+                        @include('question.options.sorted')
                         break;
 
                     case 'rank':
-                        $('question-options-container').append(rankHTML);
+                        @include('question.options.rank')
                         break;
 
                 }
@@ -145,4 +150,6 @@
         });
 
     </script>
+
+
 @endsection
