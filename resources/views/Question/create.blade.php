@@ -112,6 +112,22 @@
     </div>
 
     <script>
+        var html = '<div class="form-group row" id="new-option-' + optionsQuantity + '">\n' +
+            '                                    <label for="option"\n' +
+            '                                           class="col-md-4 col-form-label text-md-right">{{ __(\'option\') }}</label>\n' +
+            '                                    <div class="col-md-6">\n' +
+            '                                        <textarea id="description" type="description"\n' +
+            '                                                  class="form-control{{ $errors->has(\'option\') ? \' is-invalid\' : \'\' }}"\n' +
+            '                                                  name="option" value="{{ old(\'option\') }}" required\n' +
+            '                                                  autofocus></textarea>\n' +
+            '                                        <button id="remove-option" class="form-control btn btn-danger">X</button>\n' +
+            '                                        @if ($errors->has(\'option\'))\n' +
+            '                                            <span class="invalid-feedback" role="alert">\n' +
+            '                                        <strong>{{ $errors->first(\'option\') }}</strong>\n' +
+            '                                    </span>\n' +
+            '                                        @endif\n' +
+            '                                    </div>\n' +
+            '                                </div>';
         var optionsQuantity = 1;
 
         $(document).ready(function () {
@@ -125,25 +141,3 @@
         });
     </script>
 @endsection
-<script>
-    function x(id) {
-        return `
-        <div class="form-group row" id="new-option-`+id+`">
-          <label for="option"
-                 class="col-md-4 col-form-label text-md-right">{{ __('option') }}</label>
-            <div class="col-md-6">
-              <textarea id="description" type="description"
-                class="form-control{{ $errors->has('option') ? ' is-invalid' : '' }}"
-                name="option" value="{{ old('option') }}" required
-                autofocus></textarea>
-              <button id="remove-option" class="form-control btn btn-danger">X</button>
-           @if ($errors->has('option'))
-            <span class="invalid-feedback" role="alert">
-        <strong>{{ $errors->first('option') }}</strong>
-                                    </span>
-         @endif
-            </div>
-        </div>
-`;
-    }
-</script>
