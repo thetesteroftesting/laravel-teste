@@ -2,21 +2,25 @@
 
 namespace App\Http\Controllers\Question;
 
-use App\Models\Test\Question;
-use App\Models\Test\QuestionAnswer;
+use App\Repositories\Question\QuestionRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class QuestionController extends Controller
 {
-    private $questionService;
+    /**
+     * @var QuestionRepositoryInterface
+     */
+    private $questionRepository;
+
 
     /**
      * QuestionController constructor.
      */
-    public function __construct(SaveQuestionService $questionService)
+    public function __construct(QuestionRepositoryInterface $questionRepository)
     {
 
+        $this->questionRepository = $questionRepository;
     }
 
 
@@ -27,7 +31,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -37,7 +41,8 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('question.create');
     }
 
     /**

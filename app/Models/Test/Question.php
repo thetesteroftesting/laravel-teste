@@ -8,7 +8,7 @@ class Question extends Model
 {
     public function getAll()
     {
-        return $this->with('options')->with('questionType')->get();
+        return $this->with('options')->get();
     }
 
     public function numberOfQuestions ()
@@ -22,18 +22,13 @@ class Question extends Model
      */
     public function options ()
     {
-        return $this->hasMany(QuestionOption::class, 'question_number');
+        return $this->hasMany(QuestionOption::class, 'question_number', 'question_number');
     }
 
 //    public function effectOfProgress()
 //    {
 //        return $this->hasOne(EffectsOfProgress::class, 'id', 'effect_of_progress_id');
 //    }
-
-    public function questionType()
-    {
-        return $this->hasOne(QuestionType::class, 'id', 'question_type_id');
-    }
 
     public function correctAnswer()
     {

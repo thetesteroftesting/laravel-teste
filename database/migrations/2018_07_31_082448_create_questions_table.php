@@ -17,8 +17,8 @@ class CreateQuestionsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('question_number')->unique();
             $table->text('text');
-            $table->integer('options_id')->unsigned();
-            $table->integer('answer_correct_id')->unsigned();
+            //$table->integer('options_id')->unsigned();
+            $table->text('description');
             $table->integer('effect_of_progress_id')->unsigned();
             $table->string('question_type');
 

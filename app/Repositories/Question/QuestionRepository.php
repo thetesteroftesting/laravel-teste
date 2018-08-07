@@ -7,9 +7,15 @@ use App\Models\Test\Question;
 class QuestionRepository implements QuestionRepositoryInterface
 {
 
-    public function __construct()
+    /**
+     * @var Question
+     */
+    private $question;
+
+    public function __construct(Question $question)
     {
 
+        $this->question = $question;
     }
 
     /**
@@ -42,15 +48,15 @@ class QuestionRepository implements QuestionRepositoryInterface
         }
     }
 
+
     /**
-     * @param $id
-     * @return string
+     * @return array
      */
-    public function getQuestionType($id)
+    public function showAll()
     {
-        return Question::with('questionType')
-            ->select('name')
-            ->first();
+        return collect($this->question->getAll())
+            ->sortBy('question_number')
+            ->toArray();
     }
 }
 

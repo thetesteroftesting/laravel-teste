@@ -2,7 +2,7 @@
 @section('content')
     <div class="text-center">
         <h1>Pytania walidacyjne:</h1>
-        <small>Jest to twoje podejście do tego testu</small>
+
     </div>
     <div class="container mt-5">
         <div class="row">
@@ -49,8 +49,6 @@
     <script type="text/javascript">
         $(document).ready(function () {
             var id;
-
-
 
             $.ajax({
                 type: "POST",

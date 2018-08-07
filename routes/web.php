@@ -27,13 +27,9 @@ Route::prefix('admin')->group(function () {
 });
 
 
-
-
-
-Route::get('question/save/{id}', 'Question\QuestionAnswerController@save');
+Route::resource('questions', 'Question\QuestionController');
 
 Route::get('/test', 'Question\TestController@startTest');
 Route::prefix('test')->group(function () {
     Route::get('question/save/{id}', 'Question\TestController@startTest');
-
 });
