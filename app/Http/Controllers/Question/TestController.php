@@ -97,9 +97,16 @@ class TestController extends Controller
 
     }
 
-    public function actionSaveMultipleQuestions()
+    public function actionSaveQuestions()
     {
 
     }
+
+    public function actionSaveTest()
+    {
+
+    }
+
+
 
 }

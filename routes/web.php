@@ -32,4 +32,14 @@ Route::resource('questions', 'Question\QuestionController');
 Route::get('/test', 'Question\TestController@startTest');
 Route::prefix('test')->group(function () {
     Route::get('question/save/{id}', 'Question\TestController@startTest');
+
+});
+
+
+
+/*
+ *  TESTING ROUTES
+ */
+Route::get('question/open', function () {
+    return view('question.options.open');
 });

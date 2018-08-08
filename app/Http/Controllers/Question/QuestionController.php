@@ -53,6 +53,7 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
+        $quetionType = $request->input('question_type');
 
     }
 

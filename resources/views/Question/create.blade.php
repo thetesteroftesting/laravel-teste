@@ -40,20 +40,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                        <label for="description"
-                               class="col-md-2 col-form-label text-md-right">{{ __('description') }}</label>
-                        <div class="col-md-10">
-                            <textarea id="description" type="description"
-                                      class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}"
-                                      name="description" value="{{ old('description') }}" required autofocus></textarea>
-                            @if ($errors->has('description'))
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('description') }}</strong>
-                                    </span>
-                            @endif
-                        </div>
-                    </div>
+
 
                     <div class="form-group row">
                         <label for="question_type"
@@ -79,29 +66,11 @@
 
 
                             {{-- ADD QUESTION OPTION--}}
+
                             <h4 class="mt-5">Odpowiedzi</h4>
                             <hr>
-                            <div id="question-options-container">
 
-                                <div class="form-group row" id="new-option-1">
-                                    <label for="option"
-                                           class="col-md-2 col-form-label text-md-right">{{ __('option') }}</label>
-                                    <div class="col-md-10">
-                                        <textarea id="description" type="description"
-                                                  class="form-control{{ $errors->has('option') ? ' is-invalid' : '' }}"
-                                                  name="option" value="{{ old('option') }}" required
-                                                  autofocus></textarea>
-                                        <button id="remove-option" class="form-control btn btn-danger">X</button>
-                                        @if ($errors->has('option'))
-                                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('option') }}</strong>
-                                    </span>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <button id="add-option" class="form-control btn btn-info">Dodaj nową odpowiedź</button>
-                            </div>
+                            @yield('question')
 
                             <hr class="mt-5">
                             <button class="form-control btn-dark">Dodaj Pytanie</button>
@@ -120,29 +89,29 @@
                             $('#open-option-panel').remove();
                         }
                         else {
-                            @include('question.options.open')
+
                         }
 
                         break;
 
                     case 'one':
-                        @include('question.options.one')
+
                         break;
 
                     case 'multiple':
-                        @include('question.options.multiple')
+
                         break;
 
                     case 'truefalse':
-                        @include('question.options.truefalse')
+
                         break;
 
                     case 'sorted':
-                        @include('question.options.sorted')
+
                         break;
 
                     case 'rank':
-                        @include('question.options.rank')
+
                         break;
 
                 }
