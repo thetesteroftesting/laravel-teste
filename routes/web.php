@@ -43,3 +43,6 @@ Route::prefix('test')->group(function () {
 Route::get('question/open', function () {
     return view('question.options.open');
 });
+Route::get('question/one', function () {
+    return view('question.options.one');
+});
