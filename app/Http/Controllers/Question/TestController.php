@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Question;
 use App\Models\Test\Question;
 use App\Models\Test\QuestionAnswer;
 use App\Models\Test\Test;
-use App\Repositories\Question\QuestionRepositoryInterface;
+use App\Repositories\Question\Interfaces\QuestionRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Session;
 
 class TestController extends Controller
 {
-
     /**
      * @var Question
      */

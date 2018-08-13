@@ -1,63 +1,32 @@
 @extends('layouts.app')
 @section('content')
-    <div class="text-center">
-        <h1>Pytania walidacyjne:</h1>
-
-    </div>
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-12 col-sm-12 text-center ">
-                <form method="POST" action="{{ route('register') }}" aria-label="{{ __('Register') }}">
-                    @csrf
-                    <div class="questions">
-
-                        {{--<div id="question-1" class="question question-select">--}}
-                            {{--<div class="card text-white bg-primary mb-3" style="max-width: 100%;">--}}
-                                {{--<div class="card-header">Pytanie 1</div>--}}
-                                {{--<div class="card-body">--}}
-                                    {{--<h5 class="card-title">A co to się stanęło?</h5>--}}
-                                    {{--<p class="card-text">--}}
-
-                                    {{--</p>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-
-                    </div>
-                </form>
-                @foreach($questions as $key => $question)
-                    <div class="questions">
-                        <div id="question-1" class="question question-select">
-                            <div class="card text-white bg-primary mb-3" style="max-width: 100%;">
-                                <div class="card-header">Pytanie {{ $key+1 }}</div>
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ $question->text }}</h5>
-                                    <p class="card-text">
-                                        @foreach($question->options as $option)
-                                            <small><input name="radio-option-{{ $question->id}}" type="radio" data-question-type="question-select" value="{{ $option->id }}">{{ $option->name }}</small><br>
-                                        @endforeach
-                                    </p>
-                                </div>
-                            </div>
+    <div class="container-fluid">
+        <div class="row align-content-center">
+            <div class="col-md-8 offset-md-2">
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img class="d-block w-100" src="https://upload.wikimedia.org/wikipedia/commons/a/a7/Blank_scan_image.jpg" alt="First slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="https://upload.wikimedia.org/wikipedia/commons/a/a7/Blank_scan_image.jpg" alt="Second slide">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="https://upload.wikimedia.org/wikipedia/commons/a/a7/Blank_scan_image.jpg" alt="Third slide">
                         </div>
                     </div>
-                @endforeach
+                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            var id;
-
-            $.ajax({
-                type: "POST",
-                url: '/test/question/save/' . id,
-                data: data,
-            });
-
-        });
-    </script>
 @endsection
 
 

@@ -49,7 +49,6 @@ class QuestionRepository implements QuestionRepositoryInterface
         }
     }
 
-
     /**
      * @return array
      */

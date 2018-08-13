@@ -21,6 +21,7 @@ class CreateQuestionsTable extends Migration
             $table->text('description');
             $table->integer('effect_of_progress_id')->unsigned();
             $table->string('question_type');
+            $table->text('order')->nullable();
 
 //            $table->foreign('options_id')
 //                ->references('id')

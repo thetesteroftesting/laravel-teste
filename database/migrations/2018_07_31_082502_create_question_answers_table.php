@@ -17,8 +17,7 @@ class CreateQuestionAnswersTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('question_number')->unsigned()->nullable();
             $table->integer('test_id')->unsigned();
-            $table->integer('question_option_id')->unsigned()->nullable();
-
+            $table->text('question_option');
             $table->timestamps();
 
 //            $table->foreign('question_id')
