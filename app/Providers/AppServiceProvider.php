@@ -3,8 +3,8 @@
 namespace App\Providers;
 
 
+use App\Repositories\Question\Interfaces\QuestionRepositoryInterface;
 use App\Repositories\Question\QuestionRepository;
-use App\Repositories\Question\QuestionRepositoryInterface;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 

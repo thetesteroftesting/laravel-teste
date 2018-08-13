@@ -3,6 +3,7 @@
 namespace App\Repositories\Question;
 
 use App\Models\Test\Question;
+use App\Repositories\Question\Interfaces\QuestionRepositoryInterface;
 
 class QuestionRepository implements QuestionRepositoryInterface
 {

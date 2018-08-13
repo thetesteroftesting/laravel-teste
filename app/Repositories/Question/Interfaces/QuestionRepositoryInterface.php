@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\Question;
+namespace App\Repositories\Question\Interfaces;
 
 
 use http\Env\Request;
