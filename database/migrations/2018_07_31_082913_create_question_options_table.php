@@ -17,6 +17,7 @@ class CreateQuestionOptionsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('question_number');
             $table->text('name');
+            $table->string('type')->nullable();
 
 //            $table->foreign('question_id')
 //                ->references('id')

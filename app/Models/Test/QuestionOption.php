@@ -8,6 +8,6 @@ class QuestionOption extends Model
 {
     public function question ()
     {
-        $this->belongsTo(Question::class, 'question_number', 'question_number');
+        $this->hasOne(Question::class, 'question_number', 'question_number');
     }
 }

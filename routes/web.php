@@ -36,7 +36,6 @@ Route::prefix('test')->group(function () {
 });
 
 
-
 /*
  *  TESTING ROUTES
  */

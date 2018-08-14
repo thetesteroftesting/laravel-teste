@@ -84,14 +84,6 @@ class TestController extends Controller
              */
             $questionType = Question::select('question_type')->where('question_type', '=', $id)->first();
 
-            switch ($questionType) {
-                case 'choose':
-
-                    break;
-                case 'open':
-
-                    break;
-            }
         }
 
     }
