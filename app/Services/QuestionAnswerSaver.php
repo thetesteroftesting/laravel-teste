@@ -4,6 +4,8 @@ namespace App\Services;
 
 
 use App\Models\Test\QuestionAnswer;
+use App\Repositories\Question\Interfaces\QuestionAnswerRepositoryInterface;
+use App\Repositories\Question\Interfaces\QuestionRepositoryInterface;
 use App\Repositories\Question\Interfaces\TestRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,42 +13,89 @@ use Illuminate\Support\Facades\Session;
 
 class QuestionAnswerSaver
 {
+    /**
+     * @var integer
+     */
     private $test_id;
+    /**
+     * @var integer
+     */
     private $user_id;
+
+    /**
+     * @var TestRepositoryInterface
+     */
     private $testRepository;
 
+    /**
+     * @var QuestionAnswerRepositoryInterface
+     */
+    private $questionAnswerRepository;
 
-    public function __construct(TestRepositoryInterface $testRepository)
+    /**
+     * @var Request
+     */
+    private $request;
+
+    /**
+     * @var integer
+     */
+    private $questionAnswerID;
+
+    /**
+     * @var QuestionRepositoryInterface
+     */
+    private $questionRepository;
+
+    /**
+     * QuestionAnswerSaver constructor.
+     * @param TestRepositoryInterface $testRepository
+     * @param QuestionAnswerRepositoryInterface $questionAnswerRepository
+     */
+    public function __construct(TestRepositoryInterface $testRepository, QuestionAnswerRepositoryInterface $questionAnswerRepository, QuestionRepositoryInterface $questionRepository)
     {
-        $this->test_id = $this->getActualTestID();
         $this->user_id = Auth::user()->id;
         $this->testRepository = $testRepository;
+        $this->questionAnswerRepository = $questionAnswerRepository;
+        $this->questionRepository = $questionRepository;
     }
 
 
-    public function saveQuestion (Request $request)
+    public function saveQuestion(Request $request, $id)
     {
-        $this->saveByType($request);
+        $this->request = $request;
+        $this->questionAnswerID = $id;
 
+
+        //GET QUESTION TYPE
+
+
+
+    }
+
+
+    private function saveQuestionSelect()
+    {
         $questionAnswer = new QuestionAnswer();
         $questionAnswer->question_number = 1;
-        $questionAnswer->test_id = 1;
-        $questionAnswer->question_option = 1;
+        $questionAnswer->test_id = $this->getActualTestID();
+        $questionAnswer->question_option = $this->request->input('answer');
         $questionAnswer->save();
     }
 
-    private function saveByType ($question_number)
-    {
-        Question::where('id', '=', $question_number)->first();
-    }
 
-
-    private function getActualTestID ()
+    /**
+     * @return integer
+     */
+    private function getActualTestID()
     {
-        $testID = Session::get('test_id');
-        return $testID;
+        if (Session::exists('test_id')) {
+            $testID = Session::get('test_id');
+            return $testID;
+        } else {
+            redirect('/');
+        }
     }
-    
 
 
 

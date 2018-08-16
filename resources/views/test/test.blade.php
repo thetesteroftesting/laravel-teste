@@ -80,12 +80,14 @@
                                                 alert($('input[name=radio-{{ $question->question_number }}]:checked').val());
 
                                                 let answer = $('input[name=radio-{{ $question->question_number }}]:checked').val();
-                                                $.ajax({
+                                                $.ajaxSetup({
                                                     headers: {
-                                                        'X_CSRF_TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                                    },
+                                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                                    }
+                                                });
+                                                $.ajax({
                                                     type: "POST",
-                                                    url: "/test/question_answer/save",
+                                                    url: "/test/question_answer/save/{{ $question->question_number }}",
                                                     data: {
                                                         'answer': answer,
                                                     },

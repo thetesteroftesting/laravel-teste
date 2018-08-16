@@ -31,6 +31,6 @@ Route::resource('questions', 'Question\QuestionController');
 
 Route::get('/test', 'Question\TestController@startTest');
 Route::prefix('test')->group(function () {
-    Route::post('question_answer/save', 'Question\QuestionAnswerController@save');
+    Route::post('question_answer/save/{id}', 'Question\QuestionAnswerController@save');
 
 });
