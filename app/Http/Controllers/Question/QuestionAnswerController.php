@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers\Question;
 
-use App\Models\Test\QuestionAnswer;
 use App\Services\QuestionAnswerSaver;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Session;
 
 class QuestionAnswerController extends Controller
 {
@@ -16,23 +14,25 @@ class QuestionAnswerController extends Controller
     private $questionAnswerSaver;
 
     /**
+     * QuestionAnswerController constructor.
+     * @param QuestionAnswerSaver $questionAnswerSaver
+     */
+    public function __construct(QuestionAnswerSaver $questionAnswerSaver)
+    {
+        $this->questionAnswerSaver = $questionAnswerSaver;
+    }
+
+
+    /**
      * Update or create the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
      * @param $id
      * @return void
      */
-    public function save(Request $request, $id)
+    public function save(Request $request, $questionID)
     {
-        $this->questionAnswerSaver->saveQuestion($request,$id);
-
-        if (Session::exists('test_id')) {
-            $questionAnswer = new QuestionAnswer();
-            $questionAnswer->test_id = Session::get('test_id');
-            $questionAnswer->question_number = $id;
-            $questionAnswer->question_option = $request->input('answer');
-            $questionAnswer->save();
-        }
+        $this->questionAnswerSaver->saveQuestion($request,$questionID);
     }
 
 }

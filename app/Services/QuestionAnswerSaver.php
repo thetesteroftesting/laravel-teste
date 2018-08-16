@@ -8,7 +8,6 @@ use App\Repositories\Question\Interfaces\QuestionAnswerRepositoryInterface;
 use App\Repositories\Question\Interfaces\QuestionRepositoryInterface;
 use App\Repositories\Question\Interfaces\TestRepositoryInterface;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class QuestionAnswerSaver
@@ -17,11 +16,6 @@ class QuestionAnswerSaver
      * @var integer
      */
     private $test_id;
-    /**
-     * @var integer
-     */
-    private $user_id;
-
     /**
      * @var TestRepositoryInterface
      */
@@ -51,10 +45,10 @@ class QuestionAnswerSaver
      * QuestionAnswerSaver constructor.
      * @param TestRepositoryInterface $testRepository
      * @param QuestionAnswerRepositoryInterface $questionAnswerRepository
+     * @param QuestionRepositoryInterface $questionRepository
      */
     public function __construct(TestRepositoryInterface $testRepository, QuestionAnswerRepositoryInterface $questionAnswerRepository, QuestionRepositoryInterface $questionRepository)
     {
-        $this->user_id = Auth::user()->id;
         $this->testRepository = $testRepository;
         $this->questionAnswerRepository = $questionAnswerRepository;
         $this->questionRepository = $questionRepository;
@@ -66,9 +60,7 @@ class QuestionAnswerSaver
         $this->request = $request;
         $this->questionAnswerID = $id;
 
-
-        //GET QUESTION TYPE
-
+        $this->questionRepository->getQuestionTypeByQuestionID($id);
 
 
     }

@@ -26,11 +26,9 @@ Route::prefix('admin')->group(function () {
     Route::resource('users', 'Admin\UsersController');
 });
 
-
 Route::resource('questions', 'Question\QuestionController');
 
 Route::get('/test', 'Question\TestController@startTest');
 Route::prefix('test')->group(function () {
     Route::post('question_answer/save/{id}', 'Question\QuestionAnswerController@save');
-
 });

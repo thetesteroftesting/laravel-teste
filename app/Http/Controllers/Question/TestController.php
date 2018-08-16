@@ -65,46 +65,11 @@ class TestController extends Controller
             $testCreator->save();
             Session::put('test_id', $testCreator->id);
         } else {
-
+            redirect('/login');
         }
 
         return view('test.test')
             ->with('questions', $questions);
     }
-
-    public function actionSaveQuestion($id, Request $request)
-    {
-        /*
-         *  Check session and if user has permission to do this.
-         */
-        if (Session::has('test_id')) {
-
-//            $questionAnswer = QuestionAnswer::firstOrNew(
-//                ['question_number' => $id]
-//            );
-//            $questionAnswer->question_option_id = $request->input('question_option_id');
-//            $questionAnswer->question_number = $id;
-//            $questionAnswer->test_id = Session::get('test_id');
-//            $questionAnswer->save();
-//
-            /*
-             *  1. Check Type Of Question
-             */
-            $questionType = Question::select('question_type')->where('question_type', '=', $id)->first();
-
-        }
-
-    }
-
-    public function actionSaveQuestions()
-    {
-
-    }
-
-    public function actionSaveTest()
-    {
-
-    }
-
 
 }

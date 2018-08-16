@@ -15,14 +15,13 @@ class QuestionRepository implements QuestionRepositoryInterface
 
     public function __construct(Question $question)
     {
-
         $this->question = $question;
     }
 
     /**
      * @return bool
      */
-    public function canQuestionBeEditByUser($id)
+    public function doesThisTestIsLatest($id)
     {
         /*
          * 1. find latest test ID
@@ -58,6 +57,20 @@ class QuestionRepository implements QuestionRepositoryInterface
             ->sortBy('question_number')
             ->toArray();
     }
+
+    /**
+     * @param $id
+     * @return string
+     */
+    public function getQuestionTypeByOptionID($id)
+    {
+        $this->question->with('question')
+            ->select('question_type')
+            ->where('question_number', '=', $id)
+            ->first();
+    }
+
+
 }
 
 

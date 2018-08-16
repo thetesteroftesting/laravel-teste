@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Auth;
 
 class TestRepository implements TestRepositoryInterface
 {
-    private $user_id;
     private $user;
     private $test;
 
@@ -26,7 +25,6 @@ class TestRepository implements TestRepositoryInterface
      */
     public function __construct(User $user, Test $test)
     {
-        $this->user_id = Auth::user()->id;
         $this->user = $user;
         $this->test = $test;
     }
@@ -34,7 +32,7 @@ class TestRepository implements TestRepositoryInterface
     public function isBelongsToUser($test_id, $user_id)
     {
         $testQ = Test::where('id', '=', $test_id)
-            ->where('user_id', '=', $user_id)
+            ->where('user_id', '=', Auth::user()->id)
             ->count();
 
         if($testQ == 1)
