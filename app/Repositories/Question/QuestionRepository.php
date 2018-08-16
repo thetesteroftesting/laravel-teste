@@ -62,11 +62,11 @@ class QuestionRepository implements QuestionRepositoryInterface
      * @param $id
      * @return string
      */
-    public function getQuestionTypeByOptionID($id)
+    public function getQuestionTypeByQuestionID($questionID)
     {
-        $this->question->with('question')
+        $this->question
             ->select('question_type')
-            ->where('question_number', '=', $id)
+            ->where('question_number', '=', $questionID)
             ->first();
     }
 

@@ -59,10 +59,8 @@ class QuestionAnswerSaver
     {
         $this->request = $request;
         $this->questionAnswerID = $id;
-
         $this->questionRepository->getQuestionTypeByQuestionID($id);
-
-
+        response($this->questionRepository->getQuestionTypeByQuestionID($id), 200) ;
     }
 
 
