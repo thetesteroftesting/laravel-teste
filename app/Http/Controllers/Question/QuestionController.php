@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Question;
 
-use App\Repositories\Question\QuestionRepositoryInterface;
+use App\Repositories\Question\Interfaces\QuestionRepositoryInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 

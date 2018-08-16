@@ -31,7 +31,6 @@ class TestRepository implements TestRepositoryInterface
         $this->test = $test;
     }
 
-
     public function isBelongsToUser($test_id, $user_id)
     {
         $testQ = Test::where('id', '=', $test_id)

@@ -6,6 +6,7 @@ use App\Models\Test\Question;
 use App\Models\Test\QuestionAnswer;
 use App\Models\Test\Test;
 use App\Repositories\Question\Interfaces\QuestionRepositoryInterface;
+use App\Services\TestService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -27,16 +28,23 @@ class TestController extends Controller
     private $questionRepository;
 
     /**
+     * @var TestService
+     */
+    private $testService;
+
+    /**
      * TestController constructor.
      * @param Question $questions
      * @param Test $test
      * @param QuestionRepositoryInterface $questionRepository
      */
-    public function __construct(Question $questions, Test $test, QuestionRepositoryInterface $questionRepository)
+    public function __construct(Question $questions, Test $test, QuestionRepositoryInterface $questionRepository, TestService $testService)
     {
-        $this->questions = $questions;
         $this->test = $test;
+        $this->questions = $questions;
+        $this->testService = $testService;
         $this->questionRepository = $questionRepository;
+        $this->middleware('auth');
     }
 
     /**
@@ -97,7 +105,6 @@ class TestController extends Controller
     {
 
     }
-
 
 
 }
