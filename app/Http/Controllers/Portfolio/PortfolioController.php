@@ -1,85 +1,67 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: dell
+ * Date: 17.08.2018
+ * Time: 08:39
+ */
 
 namespace App\Http\Controllers\Portfolio;
 
-use App\Portfolio;
+
+use App\Http\Controllers\Controller;
+use App\Repositories\Question\Interfaces\PortfolioRepositoryInterface;
 use Illuminate\Http\Request;
 
 class PortfolioController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @var PortfolioRepositoryInterface
      */
-    public function index()
-    {
-        //
-    }
+    private $portfolioRepository;
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * PortfolioController constructor.
+     * @param PortfolioRepositoryInterface $portfolioRepository
      */
-    public function create()
+    public function __construct(PortfolioRepositoryInterface $portfolioRepository)
     {
-        //
+        $this->portfolioRepository = $portfolioRepository;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+    /*
+     *  Controller Methods
      */
-    public function store(Request $request)
+    public function show(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Portfolio  $portfolio
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Portfolio $portfolio)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Portfolio  $portfolio
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Portfolio $portfolio)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Portfolio  $portfolio
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Portfolio $portfolio)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Portfolio  $portfolio
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Portfolio $portfolio)
-    {
-        //
+        $data = $this->portfolioRepository->getViewPortfoliosData();
+        print_r($data);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

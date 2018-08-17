@@ -32,3 +32,5 @@ Route::get('/test', 'Question\TestController@startTest');
 Route::prefix('test')->group(function () {
     Route::post('question_answer/save/{id}', 'Question\QuestionAnswerController@save');
 });
+
+Route::get('portfolio', 'portfolio\PortfolioController@show');

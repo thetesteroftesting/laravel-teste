@@ -25,4 +25,5 @@ class QuestionAnswerRepository implements QuestionAnswerRepositoryInterface
         else
             return false;
     }
+
 }
